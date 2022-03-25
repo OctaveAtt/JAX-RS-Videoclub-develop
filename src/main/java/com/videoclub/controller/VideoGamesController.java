@@ -49,24 +49,14 @@ public class VideoGamesController {
     }
 
     @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response updateVideoGame(@PathParam("id") Long id,
-                                @FormParam("title") String title,
-                                @FormParam("editor") String editor,
-                                @FormParam("quantity") int quantity,
-                                @FormParam("releasedDate") String releasedDateStr) {
-
-        LocalDate releasedDate = LocalDate.now(); // from releasedDateStr
-        VideoGame videoGame = new VideoGame(title, editor, releasedDate,quantity);
-        boolean isUpdated = videoGameService.update(id, videoGame);
-
-        if (isUpdated) {
-            return Response.noContent().build();
-        } else {
-            return Response.notModified().build();
-        }
-
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(VideoGame videoGame) {
+        boolean isUpdate = DaoFactory.getVideoGameDao().update(videoGame);
+        if (isUpdate) return Response.status(204).build();
+        return Response.status(404)
+                .entity("Le film ne peut pas être mise à jour car la ressource n'existe pas")
+                .build();
     }
 
 

@@ -50,22 +50,14 @@ public class LocationController {
     }
 
     @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response updateLocation(@PathParam("id") Long id,
-                                @FormParam("loaner") User loaner,
-                                @FormParam("localDate") String releasedDateStr) {
-
-        LocalDate releasedDate = LocalDate.now(); // from releasedDateStr
-        Location location = new Location(loaner,releasedDate);
-        boolean isUpdated = locationService.update(id, location);
-
-        if (isUpdated) {
-            return Response.noContent().build();
-        } else {
-            return Response.notModified().build();
-        }
-
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(Location location) {
+        boolean isUpdate = DaoFactory.getLocationDao().update(location);
+        if (isUpdate) return Response.status(204).build();
+        return Response.status(404)
+                .entity("Le film ne peut pas être mise à jour car la ressource n'existe pas")
+                .build();
     }
 
 

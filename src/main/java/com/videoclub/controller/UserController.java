@@ -49,27 +49,14 @@ public class UserController {
     }
 
     @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response updateUser(@PathParam("id") Long id,
-                                @FormParam("firstname") String firstname,
-                                @FormParam("lastname") String lastname,
-                                @FormParam("age") int age,
-                                @FormParam("address") String address,
-                               @FormParam("phone")int phone,
-                               @FormParam("mail")String mail
-                               ) {
-
-        LocalDate releasedDate = LocalDate.now(); // from releasedDateStr
-        User user = new User(firstname,lastname,age,address,phone,mail);
-        boolean isUpdated = userService.update(id, user);
-
-        if (isUpdated) {
-            return Response.noContent().build();
-        } else {
-            return Response.notModified().build();
-        }
-
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(User user) {
+        boolean isUpdate = DaoFactory.getUserDao().update(user);
+        if (isUpdate) return Response.status(204).build();
+        return Response.status(404)
+                .entity("Le film ne peut pas être mise à jour car la ressource n'existe pas")
+                .build();
     }
 
 

@@ -49,25 +49,14 @@ public class AlbumController {
     }
 
     @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response updateAlbum(@PathParam("id") Long id,
-                                @FormParam("title") String title,
-                                @FormParam("duration") double duration,
-                                @FormParam("artist") String artist,
-                                @FormParam("quantity") int quantity,
-                                @FormParam("releasedDate") String releasedDateStr) {
-
-        LocalDate releasedDate = LocalDate.now(); // from releasedDateStr
-        Album album = new Album(title, releasedDate, artist,duration,quantity);
-        boolean isUpdated = albumService.update(id, album);
-
-        if (isUpdated) {
-            return Response.noContent().build();
-        } else {
-            return Response.notModified().build();
-        }
-
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(Album album) {
+        boolean isUpdate = DaoFactory.getAlbumDao().update(album);
+        if (isUpdate) return Response.status(204).build();
+        return Response.status(404)
+                .entity("Le film ne peut pas être mise à jour car la ressource n'existe pas")
+                .build();
     }
 
 
