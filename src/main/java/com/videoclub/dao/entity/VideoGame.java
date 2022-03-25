@@ -1,6 +1,7 @@
 package com.videoclub.dao.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.videoclub.controller.model.responses.VideoGameResponse;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ public class VideoGame {
     private Long id;
     private String title;
     private String editor;
+    @JsonFormat(pattern = "dd-MM-yyyy" )
     private LocalDate releaseDate;
     private int quantity;
 

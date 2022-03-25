@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class AlbumResponse {
     private Long id;
+    private String title;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate releaseDate;
     private String artist;
@@ -21,6 +22,14 @@ public class AlbumResponse {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDate getReleaseDate() {

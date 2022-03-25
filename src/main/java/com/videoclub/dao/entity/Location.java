@@ -1,6 +1,7 @@
 package com.videoclub.dao.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.videoclub.controller.model.responses.LocationResponse;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 public class Location {
     private Long id;
     private User loaner;
+    @JsonFormat(pattern = "dd-MM-yyyy" )
     private LocalDate localDate;
 
     public Location() {

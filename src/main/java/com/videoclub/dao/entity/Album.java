@@ -1,5 +1,6 @@
 package com.videoclub.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.videoclub.controller.model.responses.AlbumResponse;
 
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 public class Album {
     private Long id;
     private String title;
+    @JsonFormat(pattern = "dd-MM-yyyy" )
     private LocalDate releaseDate;
     private String artist;
     private double duration;
@@ -26,6 +28,7 @@ public class Album {
     public AlbumResponse toDto(){
         AlbumResponse albumResponse = new AlbumResponse();
         albumResponse.setId(this.id);
+        albumResponse.setTitle(this.title);
         albumResponse.setReleaseDate(this.releaseDate);
         albumResponse.setArtist(this.artist);
         albumResponse.setDuration(this.duration);
@@ -40,6 +43,16 @@ public class Album {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
 
     public LocalDate getReleaseDate() {
         return releaseDate;
