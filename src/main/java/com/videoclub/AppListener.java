@@ -47,7 +47,7 @@ public class AppListener implements ServletContextListener {
 
 
 
-        albumDao.save(new Album("La BoiTape",LocalDate.ofYearDay(2021,11),"BoiGang",50,21));
+        albumDao.save(new Album("La BT",LocalDate.ofYearDay(2021,11),"BG",50,21));
 
         LocationDao locationDao = DaoFactory.getLocationDao();
         locationDao.save(new Location(fre,LocalDate.ofYearDay(2022,3)));
