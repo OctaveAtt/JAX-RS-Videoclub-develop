@@ -1,3 +1,3 @@
-# Utilisation
+#Feat
 
-- Utiliser Tomcat 10 minimum
+- Fait en collaboration avec Remy, Nicolas et Gregory
